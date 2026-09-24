@@ -493,6 +493,8 @@ class LogcatProcessor:
 
           # Calculate offsets and parse lines in reverse order within this block
           current_offset = remaining + len(remainder)
+          if remaining > 0:
+            current_offset += 1  # count \n byte after remainder
           block_lines: list[tuple[int, LogLine]] = []
           for line_bytes in lines_chunk:
             line_offset = current_offset
