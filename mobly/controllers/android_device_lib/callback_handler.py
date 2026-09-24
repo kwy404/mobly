@@ -189,10 +189,11 @@ class CallbackHandler:
         break
       if predicate(event):
         return event
+    predicate_name = getattr(predicate, '__name__', repr(predicate))
     raise TimeoutError(
         self._ad,
         'Timed out after %ss waiting for an "%s" event that satisfies the '
-        'predicate "%s".' % (timeout, event_name, predicate.__name__),
+        'predicate "%s".' % (timeout, event_name, predicate_name),
     )
 
   def getAll(self, event_name):
